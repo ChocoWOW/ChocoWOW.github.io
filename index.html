@@ -113,6 +113,25 @@
                 }
 
             }
+            private void GetHurt(int amount = 1)
+            {
+                if (amount <= 0) return;
+
+                this.CurrentHealth -= amount;
+
+
+                if (this.CurrentHealth <= 0)
+                {
+                    GameManager.score += 1;
+                    gameObject.SetActive(false);
+                }
+                if (GameManager.Instance.CheckClear())
+                {
+                    GameManager.Instance.WinScreen.SetActive(true);
+                    SceneManager.LoadScene("GameOver");
+                }
+
+            }
             private void OnTriggerEnter2D(Collider2D collision)
             {
                 if (collision.gameObject)
